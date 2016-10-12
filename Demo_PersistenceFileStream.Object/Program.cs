@@ -16,6 +16,7 @@ namespace Demo_PersistenceFileStream
             ObjectListReadWrite(textFilePath);
 
             Console.WriteLine("\nPress any key to exit.");
+            Console.WriteLine(  );
             Console.ReadKey();
         }
 

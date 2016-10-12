@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Demo_PersistenceFileStream.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,9 +12,7 @@ namespace Demo_PersistenceFileStream
     {
         static void Main(string[] args)
         {
-            string textFilePath = "Data\\Data.txt";
-
-            ObjectListReadWrite(textFilePath);
+            ObjectListReadWrite(DataStructure.textFilePath);
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
@@ -93,8 +92,6 @@ namespace Demo_PersistenceFileStream
 
         static List<HighScore> ReadHighScoresFromTextFile(string dataFile)
         {
-            const char delineator = ',';
-
             List<string> highScoresStringList = new List<string>();
 
             List<HighScore> highScoresClassList = new List<HighScore>();
@@ -105,7 +102,7 @@ namespace Demo_PersistenceFileStream
             foreach (string highScoreString in highScoresStringList)
             {
                 // use the Split method and the delineator on the array to separate each property into an array of properties
-                string[] properties = highScoreString.Split(delineator);
+                string[] properties = highScoreString.Split(DataStructure.delineator);
 
                 highScoresClassList.Add(new HighScore() { PlayerName = properties[0], PlayerScore = Convert.ToInt32(properties[1]) });
             }

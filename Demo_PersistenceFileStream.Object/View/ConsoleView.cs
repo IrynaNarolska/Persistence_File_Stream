@@ -95,8 +95,8 @@ namespace Demo_PersistenceFileStream.View
         public void DisplayErrorPrompt(string errorMessage)
         {
             Console.SetCursorPosition(HORIZ_CURSOR_POS_ERROR_PROMPT, VERT_CURSOR_POS_ERROR_PROMPT);
-            Console.WriteLine("!!***************DATA ERROR ENCOUNTERED***************!!");
-            Console.WriteLine(errorMessage);
+            Console.Write("!!***************DATA ERROR ENCOUNTERED***************!!");
+            Console.WriteLine("  " + errorMessage);
             Console.WriteLine("\n\tPress any key to continue");
 
             Console.CursorVisible = false;

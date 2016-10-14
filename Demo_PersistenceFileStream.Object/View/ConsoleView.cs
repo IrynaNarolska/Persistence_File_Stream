@@ -8,5 +8,19 @@ namespace Demo_PersistenceFileStream.View
 {
     class ConsoleView
     {
+
+        #region ENUMS
+
+        public enum ViewState
+        {
+            MainMenu,
+            DisplayAllRecords,
+            ClearAllRecords,
+            AddRecord,
+            DeleteRecord,
+            UpdateRecord
+        }
+
+        #endregion
     }
 }

@@ -82,6 +82,17 @@ namespace Demo_PersistenceFileStream.View
             MainMenuChoice();
         }
 
+
+        /// <summary>
+        /// displays the update record screen
+        /// </summary>
+        public void DisplayUpdateRecordScreen()
+        {
+        
+            //TODO implement update record screen and functionality!
+
+        }
+
         /// <summary>
         /// obtain and carry out menu selection
         /// </summary>
@@ -119,6 +130,8 @@ namespace Demo_PersistenceFileStream.View
         private int GetMainMenuChoice()
         {
             int menuChoice = -1;
+
+            //TODO add menu choice functionality
 
             return menuChoice;
         }

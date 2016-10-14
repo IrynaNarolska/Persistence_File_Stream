@@ -51,7 +51,7 @@ namespace Demo_PersistenceFileStream.Controller
         }
 
         /// <summary>
-        /// designates app tasks based on view state
+        /// designates app tasks based on the current view state
         /// </summary>
         public void ManageStateTasks()
         {

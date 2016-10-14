@@ -13,6 +13,7 @@ namespace Demo_PersistenceFileStream.View
 
         public enum ViewState
         {
+            WelcomeScreen,
             MainMenu,
             DisplayAllRecords,
             ClearAllRecords,
@@ -39,6 +40,20 @@ namespace Demo_PersistenceFileStream.View
         }
 
         #endregion
+
+        #region CONSTRUCTORS
+
+        public ConsoleView ()
+        {
+            _currentViewState = ViewState.WelcomeScreen;
+        }
+
+        #endregion
+
+        #region METHODS
+
+        #endregion
+
 
     }
 }

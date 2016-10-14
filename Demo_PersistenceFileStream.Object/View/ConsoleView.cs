@@ -29,6 +29,10 @@ namespace Demo_PersistenceFileStream.View
 
         private const int NUMBER_OF_MAIN_MENU_CHOICES = 6;
 
+        // constants for cursor positioning
+        private const int VERT_CURSOR_POS_ERROR_PROMPT = 10;
+        private const int HORIZ_CURSOR_POS_ERROR_PROMPT = 3;
+
         private ViewState _currentViewState;
 
         #endregion
@@ -59,6 +63,7 @@ namespace Demo_PersistenceFileStream.View
         /// </summary>
         public void DisplayWelcomeScreen()
         {
+            Console.Clear();
             Console.WriteLine("\n\n\n\tWelcome to the Deluxe Score Manager App!");
             Console.WriteLine("\n\t---Press any key to continue---");
             Console.CursorVisible = false;
@@ -71,6 +76,7 @@ namespace Demo_PersistenceFileStream.View
         /// </summary>
         public void DisplayMainMenuScreen()
         {
+            Console.Clear();
             Console.WriteLine("\n\tPlease select a menu option from the following:");
             Console.WriteLine("\n\t1. Display all score records");
             Console.WriteLine("\t2. Add score record");
@@ -82,6 +88,20 @@ namespace Demo_PersistenceFileStream.View
             MainMenuChoice();
         }
 
+        /// <summary>
+        /// displays an error message and continue prompt
+        /// </summary>
+        /// <param name="errorMessage"></param>
+        public void DisplayErrorPrompt(string errorMessage)
+        {
+            Console.SetCursorPosition(HORIZ_CURSOR_POS_ERROR_PROMPT, VERT_CURSOR_POS_ERROR_PROMPT);
+            Console.WriteLine("!!***************DATA ERROR ENCOUNTERED***************!!");
+            Console.WriteLine(errorMessage);
+            Console.WriteLine("\n\tPress any key to continue");
+
+            Console.CursorVisible = false;
+            Console.ReadKey();
+        }
 
         /// <summary>
         /// displays the update record screen
@@ -127,6 +147,10 @@ namespace Demo_PersistenceFileStream.View
             }
         }
 
+        /// <summary>
+        /// gets main menu choice
+        /// </summary>
+        /// <returns int > main menu choice</returns>
         private int GetMainMenuChoice()
         {
             int menuChoice = -1;

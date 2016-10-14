@@ -18,9 +18,27 @@ namespace Demo_PersistenceFileStream.View
             ClearAllRecords,
             AddRecord,
             DeleteRecord,
-            UpdateRecord
+            UpdateRecord,
+            Quit
         }
 
         #endregion
+
+        #region FIELDS
+
+        private ViewState _currentViewState;
+
+        #endregion
+
+        #region PROPERTIES
+
+        public ViewState CurrentViewState
+        {
+            get { return _currentViewState; }
+            set { _currentViewState = value; }
+        }
+
+        #endregion
+
     }
 }

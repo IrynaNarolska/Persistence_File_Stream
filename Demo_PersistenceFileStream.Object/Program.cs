@@ -1,4 +1,5 @@
-﻿using Demo_PersistenceFileStream.Data;
+﻿using Demo_PersistenceFileStream.Controller;
+using Demo_PersistenceFileStream.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,102 +13,106 @@ namespace Demo_PersistenceFileStream
     {
         static void Main(string[] args)
         {
-            ObjectListReadWrite(DataStructure.textFilePath);
-
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
+            AppController appController = new AppController();
         }
+            //static void Main(string[] args)
+            //{
+            //    ObjectListReadWrite(DataStructure.textFilePath);
 
-        static void ObjectListReadWrite(string dataFile)
-        {
-            List<HighScore> highScoresClassListWrite = new List<HighScore>();
+            //    Console.WriteLine("\nPress any key to exit.");
+            //    Console.ReadKey();
+            //}
 
-            List<string> highScoresStringListRead = new List<string>(); ;
-            List<HighScore> highScoresClassListRead = new List<HighScore>(); ;
+            //static void ObjectListReadWrite(string dataFile)
+            //{
+            //    List<HighScore> highScoresClassListWrite = new List<HighScore>();
 
-            string highScoreString;
+            //    List<string> highScoresStringListRead = new List<string>(); ;
+            //    List<HighScore> highScoresClassListRead = new List<HighScore>(); ;
 
-            // initialize a list of HighScore objects
-            highScoresClassListWrite = InitializeListOfHighScores();
+            //    string highScoreString;
 
-            Console.WriteLine("The following high scores will be added to Data.txt.\n");
-            // display list of high scores objects
-            DisplayHighScores(highScoresClassListWrite);
+            //    // initialize a list of HighScore objects
+            //    highScoresClassListWrite = InitializeListOfHighScores();
 
-            Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
-            Console.ReadKey();
+            //    Console.WriteLine("The following high scores will be added to Data.txt.\n");
+            //    // display list of high scores objects
+            //    DisplayHighScores(highScoresClassListWrite);
 
-            // build the list of strings and write to the text file line by line
-            WriteHighScoresToTextFile(highScoresClassListWrite, dataFile);
+            //    Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
+            //    Console.ReadKey();
 
-            Console.WriteLine("High scores added successfully.\n");
+            //    // build the list of strings and write to the text file line by line
+            //    WriteHighScoresToTextFile(highScoresClassListWrite, dataFile);
 
-            Console.WriteLine("Read into a string of HighScore and display the high scores from data file. Press any key to continue.\n");
-            Console.ReadKey();
+            //    Console.WriteLine("High scores added successfully.\n");
+
+            //    Console.WriteLine("Read into a string of HighScore and display the high scores from data file. Press any key to continue.\n");
+            //    Console.ReadKey();
 
 
-            // build the list of HighScore class objects from the list of strings
-            highScoresClassListRead = ReadHighScoresFromTextFile(dataFile);
+            //    // build the list of HighScore class objects from the list of strings
+            //    highScoresClassListRead = ReadHighScoresFromTextFile(dataFile);
 
-            // display list of high scores objects
-            DisplayHighScores(highScoresClassListRead);
-        }
+            //    // display list of high scores objects
+            //    DisplayHighScores(highScoresClassListRead);
+            //}
 
-        static List<HighScore> InitializeListOfHighScores()
-        {
-            List<HighScore> highScoresClassList = new List<HighScore>();
+            //static List<HighScore> InitializeListOfHighScores()
+            //{
+            //    List<HighScore> highScoresClassList = new List<HighScore>();
 
-            // initialize the IList of high scores - note: no instantiation for an interface
-            highScoresClassList.Add(new HighScore() { PlayerName = "John", PlayerScore = 1296 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Joan", PlayerScore = 345 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Jeff", PlayerScore = 867 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Charlie", PlayerScore = 2309 });
+            //    // initialize the IList of high scores - note: no instantiation for an interface
+            //    highScoresClassList.Add(new HighScore() { PlayerName = "John", PlayerScore = 1296 });
+            //    highScoresClassList.Add(new HighScore() { PlayerName = "Joan", PlayerScore = 345 });
+            //    highScoresClassList.Add(new HighScore() { PlayerName = "Jeff", PlayerScore = 867 });
+            //    highScoresClassList.Add(new HighScore() { PlayerName = "Charlie", PlayerScore = 2309 });
 
-            return highScoresClassList;
-        }
+            //    return highScoresClassList;
+            //}
 
-        static void DisplayHighScores(List<HighScore> highScoreClassList)
-        {
-            foreach (HighScore player in highScoreClassList)
-            {
-                Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
-            }
-        }
+            //static void DisplayHighScores(List<HighScore> highScoreClassList)
+            //{
+            //    foreach (HighScore player in highScoreClassList)
+            //    {
+            //        Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
+            //    }
+            //}
 
-        static void WriteHighScoresToTextFile(List<HighScore> highScoreClassLIst, string dataFile)
-        {
-            string highScoreString;
+            //static void WriteHighScoresToTextFile(List<HighScore> highScoreClassLIst, string dataFile)
+            //{
+            //    string highScoreString;
 
-            List<string> highScoresStringListWrite = new List<string>();
+            //    List<string> highScoresStringListWrite = new List<string>();
 
-            // build the list to write to the text file line by line
-            foreach (var player in highScoreClassLIst)
-            {
-                highScoreString = player.PlayerName + "," + player.PlayerScore;
-                highScoresStringListWrite.Add(highScoreString);
-            }
+            //    // build the list to write to the text file line by line
+            //    foreach (var player in highScoreClassLIst)
+            //    {
+            //        highScoreString = player.PlayerName + "," + player.PlayerScore;
+            //        highScoresStringListWrite.Add(highScoreString);
+            //    }
 
-            File.WriteAllLines(dataFile, highScoresStringListWrite);
-        }
+            //    File.WriteAllLines(dataFile, highScoresStringListWrite);
+            //}
 
-        static List<HighScore> ReadHighScoresFromTextFile(string dataFile)
-        {
-            List<string> highScoresStringList = new List<string>();
+            //static List<HighScore> ReadHighScoresFromTextFile(string dataFile)
+            //{
+            //    List<string> highScoresStringList = new List<string>();
 
-            List<HighScore> highScoresClassList = new List<HighScore>();
+            //    List<HighScore> highScoresClassList = new List<HighScore>();
 
-            // read each line and put it into an array and convert the array to a list
-            highScoresStringList = File.ReadAllLines(dataFile).ToList();
+            //    // read each line and put it into an array and convert the array to a list
+            //    highScoresStringList = File.ReadAllLines(dataFile).ToList();
 
-            foreach (string highScoreString in highScoresStringList)
-            {
-                // use the Split method and the delineator on the array to separate each property into an array of properties
-                string[] properties = highScoreString.Split(DataStructure.delineator);
+            //    foreach (string highScoreString in highScoresStringList)
+            //    {
+            //        // use the Split method and the delineator on the array to separate each property into an array of properties
+            //        string[] properties = highScoreString.Split(DataStructure.delineator);
 
-                highScoresClassList.Add(new HighScore() { PlayerName = properties[0], PlayerScore = Convert.ToInt32(properties[1]) });
-            }
+            //        highScoresClassList.Add(new HighScore() { PlayerName = properties[0], PlayerScore = Convert.ToInt32(properties[1]) });
+            //    }
 
-            return highScoresClassList;
+            //    return highScoresClassList;
+            //}
         }
     }
-}

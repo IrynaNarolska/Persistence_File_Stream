@@ -15,7 +15,7 @@ namespace Demo_PersistenceFileStream
 
             SimpleTextReadWrite(textFilePath);
             //StructuredTextReadWrite(textFilePath);
-            //FileStreamReadWrite(textFilePath);
+            FileStreamReadWrite(textFilePath);
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
@@ -34,7 +34,7 @@ namespace Demo_PersistenceFileStream
 
             // initialize strings with addresses
             address01 = "Flintstone,Fred,301 Cobblestone Way,Bedrock,70777\n";
-            address02 = "Rubble,Barney,303 Cobblestone Way,Bedrock,70777\n";
+            address02 = "Rubble,Barney,303 Cobblestone Way,Bed!!!!,70777\n";
 
             Console.WriteLine("The following addresses will be added to the text file.\n");
             Console.WriteLine(address01 + address02);
@@ -198,7 +198,7 @@ namespace Demo_PersistenceFileStream
 
                 // initialize strings with addresses 
                 address01 = "Flintstone,Fred,301 Cobblestone Way,Bedrock,70777\n";
-                address02 = "Rubble,Barney,303 Cobblestone Way,Bedrock,70777\n";
+                address02 = "Rubble,Barney,303 Cobblestone Way,Bed!!!!!,70777\n";
 
                 Console.WriteLine("The following addresses will be added to the text file.\n");
                 Console.WriteLine(address01 + address02);

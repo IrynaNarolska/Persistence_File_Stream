@@ -85,7 +85,7 @@ namespace Demo_PersistenceFileStream.View
             Console.WriteLine("\t2. Add score record");
             Console.WriteLine("\t3. Update score record");
             Console.WriteLine("\t4. Delete score record");
-            Console.WriteLine("\t5. !!Delete ALL score records!!");
+            Console.WriteLine("\t5. !!Clear ALL score records!!");
             Console.WriteLine("\n\t6. Quit");
 
             MainMenuChoice();
@@ -225,6 +225,7 @@ namespace Demo_PersistenceFileStream.View
             switch (menuChoice)
             {
                 case 1:
+                    _currentViewState = ViewState.DisplayAllRecords;
                     // display all score records selected
                     break;
                 case 2:

@@ -184,6 +184,23 @@ namespace Demo_PersistenceFileStream.Controller
         {
 
         }
+                private void AddRecord()
+        {
+            try
+            {
+                string addRecord;
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void DeleteRecord()
+        {
+
+        }
         #endregion
     }
 

@@ -119,7 +119,6 @@ namespace Demo_PersistenceFileStream.Controller
             _appView.CurrentViewState = ConsoleView.ViewState.MainMenu;
         }
 
-//TODO - get ReadScores method to sync for sure with correct file
         /// <summary>
         /// attempts to read scores from the data file and overwrites the current stored score list
         /// </summary>
@@ -149,7 +148,7 @@ namespace Demo_PersistenceFileStream.Controller
             }
 
         }
-//TODO - get WriteScores method to sync for sure with the right file
+
         /// <summary>
         /// Write all high scores to the data file
         /// </summary>

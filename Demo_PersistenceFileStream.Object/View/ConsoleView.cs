@@ -214,6 +214,29 @@ namespace Demo_PersistenceFileStream.View
 
             return updatedScoreData;
         }
+        //TO DO: Iryna will try to finish this tonight. 
+        /// <summary>
+        /// Adding a record
+        /// </summary>
+        public void DisplayAddRecordScreen()
+        {
+            bool addingRecord = true;
+
+            while(addingRecord)
+            {
+                Console.Clear();
+                Console.CursorVisible = true;
+
+                Console.WriteLine("Please enter the name of the player that you want to add.");
+                Console.Write("\tor press <Enter> to return to the main menu: ");
+                string addName = Console.ReadLine();
+                if(addName == "")
+                {
+                    break;
+                }
+
+            }
+        }
 
         /// <summary>
         /// obtain and carry out menu selection

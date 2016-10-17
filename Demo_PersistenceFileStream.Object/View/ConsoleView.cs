@@ -230,6 +230,7 @@ namespace Demo_PersistenceFileStream.View
                     break;
                 case 2:
                     // add score record selected
+                    _currentViewState = ViewState.AddRecord;
                     break;
                 case 3:
                     // update score record selected
@@ -237,6 +238,7 @@ namespace Demo_PersistenceFileStream.View
                     break;
                 case 4:
                     // delete score record selected
+                    _currentViewState = ViewState.DeleteRecord;
                     break;
                 case 5:
                     // delete ALL score records selected

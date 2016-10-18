@@ -19,6 +19,10 @@ namespace Demo_PersistenceFileStream.Controller
         // instantiate model
         private static List<HighScore> _highScores = new List<HighScore>();
 
+        List<string> highScoresStringListWrite = new List<string>();
+
+        string highScoreString;
+
         // track app use
         private bool _usingApp;
 
@@ -119,14 +123,39 @@ namespace Demo_PersistenceFileStream.Controller
             _appView.CurrentViewState = ConsoleView.ViewState.MainMenu;
         }
 
+        /// <summary>
+        /// displaying the list of high scores to the player
+        /// </summary>
+        private void DisplayHighScores(List<HighScore> _highScores)
+        {
+            foreach (HighScore player in _highScores)
+            {
+                Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore );
+            }
+        }
+
+        /// <summary>
+        /// Adding players and their high scores to a list
+        /// </summary>
+        private List<HighScore> InitializeListofHighScores()
+        {
+            _highScores.Add(new HighScore() { PlayerName = "Iryna", PlayerScore = 307 });
+            _highScores.Add(new HighScore() { PlayerName = "Josiah", PlayerScore = 1463 });
+            _highScores.Add(new HighScore() { PlayerName = "Alex", PlayerScore = 678 });
+            _highScores.Add(new HighScore() { PlayerName = "John", PlayerScore = 3462 });
+
+            return _highScores;
+        }
+
 //TODO - get ReadScores method to sync for sure with correct file
         /// <summary>
         /// attempts to read scores from the data file and overwrites the current stored score list
         /// </summary>
-        private void ReadScores()
+        private List<HighScore> ReadScores()
         {
             try
             {
+
                 List<string> scoresStringList = new List<string>();
 
                 _highScores.Clear();
@@ -140,7 +169,10 @@ namespace Demo_PersistenceFileStream.Controller
                     string[] properties = highScoreString.Split(DataStructure.delineator);
 
                     _highScores.Add(new HighScore() { PlayerName = properties[0], PlayerScore = Convert.ToInt32(properties[1]) });
+
                 }
+
+                return _highScores;
             }
 
             catch (Exception)
@@ -157,18 +189,15 @@ namespace Demo_PersistenceFileStream.Controller
         {
             try
             {
-                string highScoreString;
-
-                List<string> highScoresStringListWrite = new List<string>();
-
+                             
                 // build the list to write to the text file line by line
-                foreach (var scoreListing in _highScores)
+                foreach (var player in _highScores)
                 {
-                    highScoreString = scoreListing.PlayerName + DataStructure.delineator + scoreListing.PlayerScore;
+                    highScoreString = player.PlayerName + DataStructure.delineator + player.PlayerScore;
                     highScoresStringListWrite.Add(highScoreString);
                 }
 
-                File.Delete(DataStructure.textFilePath);
+                //File.Delete(DataStructure.textFilePath);
                 File.WriteAllLines(DataStructure.textFilePath, highScoresStringListWrite);
      
             }
@@ -180,8 +209,20 @@ namespace Demo_PersistenceFileStream.Controller
 
         }
 
+        /// <summary>
+        /// clears all high scores from the text file
+        /// </summary>
         private void ClearScores()
         {
+            foreach (var scoreListing in _highScores)
+            {
+                highScoreString = scoreListing.PlayerName + DataStructure.delineator + scoreListing.PlayerScore;
+                highScoresStringListWrite.Add(highScoreString);
+            }
+
+            File.WriteAllText(DataStructure.textFilePath, string.Empty);
+
+            
 
         }
         #endregion

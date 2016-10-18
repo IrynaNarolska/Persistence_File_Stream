@@ -123,30 +123,6 @@ namespace Demo_PersistenceFileStream.Controller
             _appView.CurrentViewState = ConsoleView.ViewState.MainMenu;
         }
 
-        /// <summary>
-        /// displaying the list of high scores to the player
-        /// </summary>
-        private void DisplayHighScores(List<HighScore> _highScores)
-        {
-            foreach (HighScore player in _highScores)
-            {
-                Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore );
-            }
-        }
-
-        /// <summary>
-        /// Adding players and their high scores to a list
-        /// </summary>
-        private List<HighScore> InitializeListofHighScores()
-        {
-            _highScores.Add(new HighScore() { PlayerName = "Iryna", PlayerScore = 307 });
-            _highScores.Add(new HighScore() { PlayerName = "Josiah", PlayerScore = 1463 });
-            _highScores.Add(new HighScore() { PlayerName = "Alex", PlayerScore = 678 });
-            _highScores.Add(new HighScore() { PlayerName = "John", PlayerScore = 3462 });
-
-            return _highScores;
-        }
-
 //TODO - get ReadScores method to sync for sure with correct file
         /// <summary>
         /// attempts to read scores from the data file and overwrites the current stored score list
@@ -181,7 +157,7 @@ namespace Demo_PersistenceFileStream.Controller
             }
 
         }
-//TODO - get WriteScores method to sync for sure with the right file
+
         /// <summary>
         /// Write all high scores to the data file
         /// </summary>
@@ -189,7 +165,7 @@ namespace Demo_PersistenceFileStream.Controller
         {
             try
             {
-                             
+
                 // build the list to write to the text file line by line
                 foreach (var player in _highScores)
                 {
@@ -223,6 +199,22 @@ namespace Demo_PersistenceFileStream.Controller
             File.WriteAllText(DataStructure.textFilePath, string.Empty);
 
             
+
+        }
+                private void AddRecord()
+        {
+            try
+            {
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void DeleteRecord()
+        {
 
         }
         #endregion

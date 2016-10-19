@@ -227,7 +227,7 @@ namespace Demo_PersistenceFileStream.View
         public string DisplayAddRecordScreen()
         {
             bool addingRecord = true;
-
+            string addedRecord = "";
             while (addingRecord)
             {
                 Console.Clear();
@@ -240,11 +240,14 @@ namespace Demo_PersistenceFileStream.View
                 {
                     break;
                 }
-                Console.WriteLine("Now enter " + addName + "'s score.");
-                string addScore = Console.ReadLine();
+                else
+                {
+                    Console.WriteLine("Now enter " + addName + "'s score.");
+                    string addScore = Console.ReadLine();
+                    addedRecord = addName + DataStructure.delineator + addScore;
+                    addingRecord = false;
+                }
             }
-
-            _appController.WriteScores();
             return addedRecord;
         }
 

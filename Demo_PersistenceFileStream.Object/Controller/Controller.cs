@@ -80,9 +80,12 @@ namespace Demo_PersistenceFileStream.Controller
                     _consoleView.DisplayMainMenuScreen();
                     break;
                 case ConsoleView.ViewState.DisplayAllRecords:
+                    ReadScores();
                     _consoleView.DisplayHighScores(highScores);
                     break;
                 case ConsoleView.ViewState.ClearAllRecords:
+                    ClearScores();
+                    _consoleView.DisplayClearMessage();
                     break;
                 case ConsoleView.ViewState.AddRecord:
                     break;
@@ -158,9 +161,9 @@ namespace Demo_PersistenceFileStream.Controller
                 return highScores;
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                _consoleView.DisplayErrorPrompt(errorMessage);
+                _consoleView.DisplayErrorPrompt(ex.Message);
                 throw;
             }
 
@@ -184,6 +187,32 @@ namespace Demo_PersistenceFileStream.Controller
                 //File.Delete(DataStructure.textFilePath);
                 File.WriteAllLines(DataStructure.textFilePath, highScoresStringListWrite);
 
+                _consoleView.CurrentViewState = ConsoleView.ViewState.MainMenu;
+            }
+
+            catch (Exception ex)
+            {
+                _consoleView.DisplayErrorPrompt(ex.Message);
+                throw;
+            }
+
+        }
+
+
+        /// <summary>
+        /// clears all high scores from the text file
+        /// </summary>
+        private void ClearScores()
+        {
+            try
+            {
+
+                foreach (var player in highScores)
+                {
+                    highScoreString = player.PlayerName + DataStructure.delineator + player.PlayerScore;
+                    highScoresStringListWrite.Add(highScoreString);
+                }
+                File.WriteAllText(DataStructure.textFilePath, string.Empty);
             }
 
             catch (Exception)
@@ -191,35 +220,6 @@ namespace Demo_PersistenceFileStream.Controller
                 _consoleView.DisplayErrorPrompt(errorMessage);
                 throw;
             }
-
-        }
-
-
-        public List<HighScore> InitializeListOfHighScores()
-        {
-            List<HighScore> highScores = new List<HighScore>();
-
-            // initialize the IList of high scores - note: no instantiation for an interface
-            highScores.Add(new HighScore() { PlayerName = "John", PlayerScore = 1296 });
-            highScores.Add(new HighScore() { PlayerName = "Joan", PlayerScore = 345 });
-            highScores.Add(new HighScore() { PlayerName = "Jeff", PlayerScore = 867 });
-            highScores.Add(new HighScore() { PlayerName = "Charlie", PlayerScore = 2309 });
-
-            return highScores;
-        }
-
-        /// <summary>
-        /// clears all high scores from the text file
-        /// </summary>
-        private void ClearScores()
-        {
-            foreach (var scoreListing in highScores)
-            {
-                highScoreString = scoreListing.PlayerName + DataStructure.delineator + scoreListing.PlayerScore;
-                highScoresStringListWrite.Add(highScoreString);
-            }
-
-            File.WriteAllText(DataStructure.textFilePath, string.Empty);
 
 
 

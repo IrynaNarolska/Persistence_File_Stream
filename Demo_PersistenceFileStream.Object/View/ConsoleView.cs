@@ -221,12 +221,14 @@ namespace Demo_PersistenceFileStream.View
             return updatedScoreData;
         }
 
+        /// <summary>
+        /// displays a prompt if there's no record
+        /// </summary>
         public void DisplayNoRecordPrompt()
         {
             Console.WriteLine("No player record found!");
             Console.ReadKey();
         }
-
 
         /// <summary>
         /// Adding a record
@@ -259,6 +261,7 @@ namespace Demo_PersistenceFileStream.View
             HighScore newRecord = new HighScore() { PlayerName = addedRecordArray[0], PlayerScore = Convert.ToInt32(addedRecordArray[1]) };
             return newRecord;
         }
+
         /// <summary>
         /// Deleting a record
         /// </summary>
@@ -353,6 +356,10 @@ namespace Demo_PersistenceFileStream.View
             return menuChoice;
         }
 
+        /// <summary>
+        /// method for displaying the high score
+        /// </summary>
+        /// <param name="highScores"></param>
         public void DisplayHighScores(List<HighScore> highScores)
         {
 
@@ -374,6 +381,9 @@ namespace Demo_PersistenceFileStream.View
             _currentViewState = ViewState.MainMenu;
         }
 
+        /// <summary>
+        /// method to clear a message
+        /// </summary>
         public void DisplayClearMessage()
         {
             Console.WriteLine("\n\n\t\t\tAll of your files have been cleared");

@@ -224,24 +224,25 @@ namespace Demo_PersistenceFileStream.View
         /// <summary>
         /// Adding a record
         /// </summary>
-        public void DisplayAddRecordScreen()
+        public string DisplayAddRecordScreen()
         {
-            bool addingRecord = true;
-
-            while (addingRecord)
-            {
                 Console.Clear();
                 Console.CursorVisible = true;
 
                 Console.WriteLine("Please enter the name of the player that you want to add.");
                 Console.Write("\tor press <Enter> to return to the main menu: ");
                 string addName = Console.ReadLine();
-                if (addName == "")
-                {
-                    break;
-                }
 
-            }
+                Console.WriteLine("Now enter " + addName + "'s score.");
+                string addScore = Console.ReadLine();
+
+                return addName;
+        }
+        public string DisplayAddScoreScreen()
+        {
+            Console.WriteLine("Now enter the score.");
+            string addScore = Console.ReadLine();
+            return addScore;
         }
 
         /// <summary>

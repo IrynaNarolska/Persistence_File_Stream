@@ -224,6 +224,7 @@ namespace Demo_PersistenceFileStream.View
         public void DisplayNoRecordPrompt()
         {
             Console.WriteLine("No player record found!");
+            Console.ReadKey();
         }
 
 

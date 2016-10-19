@@ -42,6 +42,7 @@ namespace Demo_PersistenceFileStream.View
         private ViewState _currentViewState;
 
         AppController _appController;
+        private List<HighScore> highScoresClassListWrite;
 
         #endregion
 
@@ -57,7 +58,7 @@ namespace Demo_PersistenceFileStream.View
 
         #region CONSTRUCTORS
 
-        public ConsoleView ()
+        public ConsoleView()
         {
             _currentViewState = ViewState.WelcomeScreen;
         }
@@ -186,7 +187,7 @@ namespace Demo_PersistenceFileStream.View
                             string userScore = Console.ReadLine();
 
                             if (userScore == "") { enteringNewScore = false; }
-                            else if (int.TryParse(userScore, out newScore)  && newScore >= 0)
+                            else if (int.TryParse(userScore, out newScore) && newScore >= 0)
                             {
                                 selectingPlayer = false;
                                 enteringNewScore = false;
@@ -227,7 +228,7 @@ namespace Demo_PersistenceFileStream.View
         {
             bool addingRecord = true;
 
-            while(addingRecord)
+            while (addingRecord)
             {
                 Console.Clear();
                 Console.CursorVisible = true;
@@ -235,7 +236,7 @@ namespace Demo_PersistenceFileStream.View
                 Console.WriteLine("Please enter the name of the player that you want to add.");
                 Console.Write("\tor press <Enter> to return to the main menu: ");
                 string addName = Console.ReadLine();
-                if(addName == "")
+                if (addName == "")
                 {
                     break;
                 }
@@ -289,7 +290,7 @@ namespace Demo_PersistenceFileStream.View
         {
             int menuChoice = -1;
             bool choosing = true;
-            while(choosing)
+            while (choosing)
             {
                 Console.SetCursorPosition(HORIZ_CURSOR_POS_MENU_PROMPT, VERT_CURSOR_POS_MENU_PROMPT);
                 Console.Write("\n\tSelect a menu option between 1 and " + NUMBER_OF_MAIN_MENU_CHOICES + ":  ");
@@ -309,46 +310,47 @@ namespace Demo_PersistenceFileStream.View
 
         public void DisplayHighScores(List<HighScore> highScores)
         {
+
+            highScoresClassListWrite = _appController.InitializeListOfHighScores();
+
             foreach (HighScore player in highScores)
             {
                 Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
             }
         }
 
-        private void ObjectListReadWrite(string dataFile)
-        {
-            List<HighScore> highScoresClassListWrite = new List<HighScore>();
+        //private void ObjectListReadWrite(string dataFile)
+        //{
+        //    List<HighScore> highScoresClassListWrite = new List<HighScore>();
 
-            List<string> highScoresStringListRead = new List<string>(); ;
-            List<HighScore> highScoresClassListRead = new List<HighScore>(); ;
+        //    List<string> highScoresStringListRead = new List<string>(); ;
+        //    List<HighScore> highScoresClassListRead = new List<HighScore>(); 
 
-            string highScoreString;
+        //    // initialize a list of HighScore objects
+        //    highScoresClassListWrite = _appController.InitializeListOfHighScores();
 
-            // initialize a list of HighScore objects
-            highScoresClassListWrite = _appController.InitializeListOfHighScores();
+        //    Console.WriteLine("The following high scores will be added to Data.txt.\n");
+        //    // display list of high scores objects
+        //    DisplayHighScores(highScoresClassListWrite);
 
-            Console.WriteLine("The following high scores will be added to Data.txt.\n");
-            // display list of high scores objects
-            DisplayHighScores(highScoresClassListWrite);
+        //    Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
+        //    Console.ReadKey();
 
-            Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
-            Console.ReadKey();
+        //    // build the list of strings and write to the text file line by line
+        //   _appController.WriteScores();
 
-            // build the list of strings and write to the text file line by line
-           _appController.WriteHighScoresToTextFile(highScoresClassListWrite, dataFile);
+        //    Console.WriteLine("High scores added successfully.\n");
 
-            Console.WriteLine("High scores added successfully.\n");
-
-            Console.WriteLine("Read into a string of HighScore and display the high scores from data file. Press any key to continue.\n");
-            Console.ReadKey();
+        //    Console.WriteLine("Read into a string of HighScore and display the high scores from data file. Press any key to continue.\n");
+        //    Console.ReadKey();
 
 
-            // build the list of HighScore class objects from the list of strings
-            highScoresClassListRead = _appController.ReadHighScoresFromTextFile(dataFile);
+        //    // build the list of HighScore class objects from the list of strings
+        //    highScoresClassListRead = _appController.ReadScores();
 
-            // display list of high scores objects
-            DisplayHighScores(highScoresClassListRead);
-        }
+        //    // display list of high scores objects
+        //    DisplayHighScores(highScoresClassListRead);
+        //}
 
 
         #endregion

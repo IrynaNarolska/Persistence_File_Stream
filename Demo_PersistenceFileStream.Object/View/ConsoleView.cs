@@ -220,11 +220,17 @@ namespace Demo_PersistenceFileStream.View
 
             return updatedScoreData;
         }
-        //TO DO: Iryna will try to finish this tonight. 
+
+        public void DisplayNoRecordPrompt()
+        {
+            Console.WriteLine("No player record found!");
+        }
+
+
         /// <summary>
         /// Adding a record
         /// </summary>
-        public string DisplayAddRecordScreen()
+        public HighScore DisplayAddRecordScreen()
         {
             bool addingRecord = true;
             string addedRecord = "";
@@ -248,9 +254,39 @@ namespace Demo_PersistenceFileStream.View
                     addingRecord = false;
                 }
             }
-            return addedRecord;
+            string[] addedRecordArray = addedRecord.Split(DataStructure.delineator);
+            HighScore newRecord = new HighScore() { PlayerName = addedRecordArray[0], PlayerScore = Convert.ToInt32(addedRecordArray[1]) };
+            return newRecord;
         }
+        /// <summary>
+        /// Deleting a record
+        /// </summary>
+        public string DiplayDeleteRecordScreen()
+        {
+            bool deletingRecord = true;
+            string deleteRecord = "";
+            while (deletingRecord)
+            {
+                Console.Clear();
+                Console.CursorVisible = true;
 
+                Console.WriteLine("Please enter the name of the player that you want to delete.");
+                Console.Write("\tor press <Enter> to return to the main menu: ");
+                string deleteName = Console.ReadLine();
+
+                if (deleteName == "")
+                {
+                    break;
+                }
+                else
+                {
+                    deleteRecord = deleteName;
+                    deletingRecord = false;
+                }
+            }
+
+            return deleteRecord;
+        }
 
         /// <summary>
         /// obtain and carry out menu selection

@@ -88,8 +88,10 @@ namespace Demo_PersistenceFileStream.Controller
                     _consoleView.DisplayClearMessage();
                     break;
                 case ConsoleView.ViewState.AddRecord:
+                    AddRecord();
                     break;
                 case ConsoleView.ViewState.DeleteRecord:
+                    DeleteRecord();
                     break;
                 case ConsoleView.ViewState.UpdateRecord:
                     ProcessUpdateRecord();
@@ -184,7 +186,7 @@ namespace Demo_PersistenceFileStream.Controller
                     highScoresStringListWrite.Add(highScoreString);
                 }
 
-                //File.Delete(DataStructure.textFilePath);
+                File.Delete(DataStructure.textFilePath);
                 File.WriteAllLines(DataStructure.textFilePath, highScoresStringListWrite);
 
                 _consoleView.CurrentViewState = ConsoleView.ViewState.MainMenu;
@@ -229,17 +231,48 @@ namespace Demo_PersistenceFileStream.Controller
         {
             try
             {
+                HighScore highScore = _consoleView.DisplayAddRecordScreen();   
+                     
+                highScores.Add(highScore);
 
+                WriteScores();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _consoleView.DisplayErrorPrompt(ex.Message);
                 throw;
             }
         }
 
         private void DeleteRecord()
         {
+            try
+            {  
+                string deletedPlayerName = _consoleView.DiplayDeleteRecordScreen();
+                ReadScores();
+                int highScoreIndex = 0;
+
+                for (int i = 0; i < highScores.Count; i++)
+                {
+                    if (deletedPlayerName == highScores[i].PlayerName)
+                    {
+                        highScoreIndex = i;
+                    }
+                    else
+                    {
+                        _consoleView.DisplayNoRecordPrompt();
+                    }
+                }
+                highScores.Remove(highScores[highScoreIndex]);
+                WriteScores();
+
+            }
+            catch (Exception ex)
+            {
+                _consoleView.DisplayErrorPrompt(ex.Message);
+                throw;
+            }
 
         }
 

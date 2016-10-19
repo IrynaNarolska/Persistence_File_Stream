@@ -316,47 +316,33 @@ namespace Demo_PersistenceFileStream.View
         public void DisplayHighScores(List<HighScore> highScores)
         {
 
-            highScoresClassListWrite = _appController.InitializeListOfHighScores();
-
-            foreach (HighScore player in highScores)
+            if (highScores.Count == 0)
             {
-                Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
+                Console.WriteLine("\n\nThere are no stored records to display");
             }
+            else
+            {
+                foreach (HighScore player in highScores)
+                {
+                    Console.WriteLine("\n\nPlayer: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
+
+                }
+            }
+
+
+            Console.ReadKey();
+            _currentViewState = ViewState.MainMenu;
         }
 
-        //private void ObjectListReadWrite(string dataFile)
-        //{
-        //    List<HighScore> highScoresClassListWrite = new List<HighScore>();
+        public void DisplayClearMessage()
+        {
+            Console.WriteLine("\n\n\t\t\tAll of your files have been cleared");
 
-        //    List<string> highScoresStringListRead = new List<string>(); ;
-        //    List<HighScore> highScoresClassListRead = new List<HighScore>(); 
+            Console.WriteLine("\n\t\t\tPress any key to continue");
+            Console.ReadKey();
 
-        //    // initialize a list of HighScore objects
-        //    highScoresClassListWrite = _appController.InitializeListOfHighScores();
-
-        //    Console.WriteLine("The following high scores will be added to Data.txt.\n");
-        //    // display list of high scores objects
-        //    DisplayHighScores(highScoresClassListWrite);
-
-        //    Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
-        //    Console.ReadKey();
-
-        //    // build the list of strings and write to the text file line by line
-        //   _appController.WriteScores();
-
-        //    Console.WriteLine("High scores added successfully.\n");
-
-        //    Console.WriteLine("Read into a string of HighScore and display the high scores from data file. Press any key to continue.\n");
-        //    Console.ReadKey();
-
-
-        //    // build the list of HighScore class objects from the list of strings
-        //    highScoresClassListRead = _appController.ReadScores();
-
-        //    // display list of high scores objects
-        //    DisplayHighScores(highScoresClassListRead);
-        //}
-
+            _currentViewState = ViewState.MainMenu;
+        }
 
         #endregion
 

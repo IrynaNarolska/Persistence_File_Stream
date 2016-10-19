@@ -178,7 +178,7 @@ namespace Demo_PersistenceFileStream.Controller
         {
             try
             {
-
+                highScoresStringListWrite.Clear();
                 // build the list to write to the text file line by line
                 foreach (var player in highScores)
                 {
@@ -231,8 +231,8 @@ namespace Demo_PersistenceFileStream.Controller
         {
             try
             {
-                HighScore highScore = _consoleView.DisplayAddRecordScreen();   
-                     
+                HighScore highScore = _consoleView.DisplayAddRecordScreen();
+
                 highScores.Add(highScore);
 
                 WriteScores();
@@ -248,29 +248,36 @@ namespace Demo_PersistenceFileStream.Controller
         private void DeleteRecord()
         {
             try
-            {  
+            {
                 string deletedPlayerName = _consoleView.DiplayDeleteRecordScreen();
                 ReadScores();
                 int highScoreIndex = 0;
+                bool highScoreFound = false;
 
                 for (int i = 0; i < highScores.Count; i++)
                 {
                     if (deletedPlayerName == highScores[i].PlayerName)
                     {
                         highScoreIndex = i;
-                    }
-                    else
-                    {
-                        _consoleView.DisplayNoRecordPrompt();
+                        highScoreFound = true;
                     }
                 }
-                highScores.Remove(highScores[highScoreIndex]);
-                WriteScores();
 
+                if (highScoreFound)
+                {
+                    highScores.Remove(highScores[highScoreIndex]);
+                    WriteScores();
+                }
+                else
+                {
+                    _consoleView.DisplayNoRecordPrompt();
+                    _consoleView.CurrentViewState = ConsoleView.ViewState.MainMenu;
+                }
             }
             catch (Exception ex)
             {
                 _consoleView.DisplayErrorPrompt(ex.Message);
+
                 throw;
             }
 

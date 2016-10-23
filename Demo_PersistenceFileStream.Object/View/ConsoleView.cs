@@ -40,10 +40,7 @@ namespace Demo_PersistenceFileStream.View
         private const int HORIZ_CURSOR_POS_MENU_PROMPT = 2;
 
         private ViewState _currentViewState;
-
-        AppController _appController;
-        private List<HighScore> highScoresClassListWrite;
-
+        
         #endregion
 
         #region PROPERTIES

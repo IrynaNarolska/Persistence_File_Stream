@@ -28,9 +28,7 @@ namespace Demo_PersistenceFileStream.Controller
 
         // track app use
         private bool _usingApp;
-        private string errorMessage;
-
-
+        
         #endregion
 
         #region CONSTRUCTORS
@@ -80,7 +78,7 @@ namespace Demo_PersistenceFileStream.Controller
                     _consoleView.DisplayMainMenuScreen();
                     break;
                 case ConsoleView.ViewState.DisplayAllRecords:
-                    ReadScores();
+                    ReadScores(false);
                     _consoleView.DisplayHighScores(highScores);
                     break;
                 case ConsoleView.ViewState.ClearAllRecords:
@@ -112,7 +110,7 @@ namespace Demo_PersistenceFileStream.Controller
         {
             try
             {
-                ReadScores();
+                ReadScores(true);
 
                 // create score data as an array of list index + updated score info
                 int[] scoreData = _consoleView.DisplayUpdateRecordScreen(highScores);
@@ -132,20 +130,17 @@ namespace Demo_PersistenceFileStream.Controller
             _consoleView.CurrentViewState = ConsoleView.ViewState.MainMenu;
         }
 
-
-
-
-        ////TODO - get ReadScores method to sync for sure with correct file
-        ///// <summary>
-        ///// attempts to read scores from the data file and overwrites the current stored score list
-        ///// </summary>
-        public List<HighScore> ReadScores()
+        /// <summary>
+        /// attempts to read scores from the data file and overwrites the current stored score list, with option to handle or pass exceptions
+        /// </summary>
+        /// <param name="throwException">Choose whether to throw exception or handle it at the ReadScores method level</param>
+        /// <returns></returns>
+        public void ReadScores(bool throwException)
         {
             try
             {
-
                 List<string> scoresStringList = new List<string>();
-
+                
                 highScores.Clear();
 
                 // read each line and put it into an array and convert the array to a list
@@ -158,15 +153,15 @@ namespace Demo_PersistenceFileStream.Controller
 
                     highScores.Add(new HighScore() { PlayerName = properties[0], PlayerScore = Convert.ToInt32(properties[1]) });
 
-                }
-
-                return highScores;
+                }             
             }
 
             catch (Exception ex)
             {
-                _consoleView.DisplayErrorPrompt(ex.Message);
-                throw;
+                if (throwException)
+                { _consoleView.DisplayErrorPrompt(ex.Message); }
+                else
+                { throw; }
             }
 
         }
@@ -192,14 +187,11 @@ namespace Demo_PersistenceFileStream.Controller
                 _consoleView.CurrentViewState = ConsoleView.ViewState.MainMenu;
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                _consoleView.DisplayErrorPrompt(ex.Message);
                 throw;
             }
-
         }
-
 
         /// <summary>
         /// clears all high scores from the text file
@@ -217,14 +209,10 @@ namespace Demo_PersistenceFileStream.Controller
                 File.WriteAllText(DataStructure.textFilePath, string.Empty);
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
-                _consoleView.DisplayErrorPrompt(errorMessage);
-                throw;
+                _consoleView.DisplayErrorPrompt(ex.Message);
             }
-
-
-
         }
 
         private void AddRecord()
@@ -241,7 +229,6 @@ namespace Demo_PersistenceFileStream.Controller
             catch (Exception ex)
             {
                 _consoleView.DisplayErrorPrompt(ex.Message);
-                throw;
             }
         }
 
@@ -250,7 +237,7 @@ namespace Demo_PersistenceFileStream.Controller
             try
             {
                 string deletedPlayerName = _consoleView.DiplayDeleteRecordScreen();
-                ReadScores();
+                ReadScores(true);
                 int highScoreIndex = 0;
                 bool highScoreFound = false;
 
@@ -277,8 +264,6 @@ namespace Demo_PersistenceFileStream.Controller
             catch (Exception ex)
             {
                 _consoleView.DisplayErrorPrompt(ex.Message);
-
-                throw;
             }
 
         }

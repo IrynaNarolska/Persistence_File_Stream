@@ -230,17 +230,18 @@ namespace Demo_PersistenceFileStream.View
         /// <summary>
         /// Adding a record
         /// </summary>
-        public HighScore DisplayAddRecordScreen()
+        public string[] DisplayAddRecordScreen()
         {
             bool addingRecord = true;
-            string addedRecord = "";
+            int score = -1;
+            string[] addedRecord = { "", "" };
             while (addingRecord)
             {
                 Console.Clear();
                 Console.CursorVisible = true;
 
-                Console.WriteLine("Please enter the name of the player that you want to add.");
-                Console.Write("\tor press <Enter> to return to the main menu: ");
+                Console.WriteLine("   Please enter the name of the player that you want to add.");
+                Console.Write("   or press <Enter> to return to the main menu: ");
                 string addName = Console.ReadLine();
                 if (addName == "")
                 {
@@ -248,15 +249,30 @@ namespace Demo_PersistenceFileStream.View
                 }
                 else
                 {
-                    Console.WriteLine("Now enter " + addName + "'s score.");
+                    Console.WriteLine();
+                    Console.WriteLine("   Now enter " + addName + "'s score.");
+                    Console.Write("   ");
                     string addScore = Console.ReadLine();
-                    addedRecord = addName + DataStructure.delineator + addScore;
-                    addingRecord = false;
+                    if (addScore == "")
+                    {
+                        break;
+                    }
+                    else if (int.TryParse(addScore, out score) && score >= 0)
+                    {
+                        addedRecord[0] = "1";
+                        addedRecord[1] = addName + DataStructure.delineator + addScore;
+                        addingRecord = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("   Score values must be an integer of zero or greater!");
+                        Console.WriteLine("   Press any key to re-attempt");
+                        Console.ReadKey();
+                    }
                 }
             }
-            string[] addedRecordArray = addedRecord.Split(DataStructure.delineator);
-            HighScore newRecord = new HighScore() { PlayerName = addedRecordArray[0], PlayerScore = Convert.ToInt32(addedRecordArray[1]) };
-            return newRecord;
+
+            return addedRecord;
         }
 
         /// <summary>

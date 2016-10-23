@@ -122,6 +122,7 @@ namespace Demo_PersistenceFileStream.Controller
                     WriteScores();
                     _consoleView.DisplayUpdatePrompt(highScores[scoreData[0]]);
                 }
+
             }
             catch (Exception ex)
             {
@@ -192,7 +193,7 @@ namespace Demo_PersistenceFileStream.Controller
                 throw;
             }
         }
-
+        
         /// <summary>
         /// clears all high scores from the text file
         /// </summary>
@@ -215,23 +216,33 @@ namespace Demo_PersistenceFileStream.Controller
             }
         }
 
+        /// <summary>
+        /// Add record to listing
+        /// </summary>
         private void AddRecord()
         {
             try
             {
-                HighScore highScore = _consoleView.DisplayAddRecordScreen();
+                string[] potentialRecord = _consoleView.DisplayAddRecordScreen();
+                if (potentialRecord[0] == "1")
+                {
+                    string[] properties = potentialRecord[1].Split(DataStructure.delineator);
 
-                highScores.Add(highScore);
+                    highScores.Add(new HighScore() { PlayerName = properties[0], PlayerScore = Convert.ToInt32(properties[1]) });
 
-                WriteScores();
-
+                    WriteScores();
+                }
             }
             catch (Exception ex)
             {
                 _consoleView.DisplayErrorPrompt(ex.Message);
             }
+            _consoleView.CurrentViewState = ConsoleView.ViewState.MainMenu;
         }
 
+        /// <summary>
+        /// delete record based on name
+        /// </summary>
         private void DeleteRecord()
         {
             try
